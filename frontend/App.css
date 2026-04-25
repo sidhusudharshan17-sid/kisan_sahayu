@@ -1,0 +1,294 @@
+/* ========================= */
+/* 🔧 RESET / BASE           */
+/* ========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+  color: #eaf7ea;
+  background: #0b1f0b; /* fallback while video loads */
+  overflow-x: hidden;
+}
+
+/* ========================= */
+/* 🎬 VIDEO BACKGROUND       */
+/* ========================= */
+.background-video {
+  position: fixed;
+  inset: 0;                 /* shorthand for top/left/right/bottom: 0 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -10;             /* keep behind everything */
+  pointer-events: none;     /* prevent capturing clicks */
+}
+
+/* 🌫️ OVERLAY FOR READABILITY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(60% 60% at 50% 30%, rgba(0,0,0,0.15), rgba(0,0,0,0.55)),
+    linear-gradient(to bottom, rgba(0, 40, 0, 0.25), rgba(0, 20, 0, 0.65));
+  z-index: -5;
+  pointer-events: none;
+}
+
+/* ========================= */
+/* 🧱 APP LAYOUT             */
+/* ========================= */
+.video-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.App {
+  position: relative;
+  z-index: 1;
+  background: transparent; /* 🔥 allow video to show through */
+}
+
+.main-content {
+  padding: 24px;
+  background: transparent;
+  min-height: calc(100vh - 72px); /* adjust if your navbar height differs */
+}
+
+/* ========================= */
+/* 🧊 GLASS / CARD STYLES    */
+/* ========================= */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.card {
+  padding: 18px;
+  border-radius: 16px;
+}
+
+/* Example utility if you wrap sections/cards */
+.section {
+  margin: 16px 0;
+}
+
+/* ========================= */
+/* 🧭 NAVBAR (GLASSY)        */
+/* ========================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(46, 125, 50, 0.65); /* translucent green */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+/* ========================= */
+/* 🔘 BUTTONS                */
+/* ========================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #eaf7ea;
+  background: rgba(46, 125, 50, 0.65);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  background: rgba(56, 142, 60, 0.75);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========================= */
+/* 🧾 INPUTS                 */
+/* ========================= */
+.input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #eaf7ea;
+  outline: none;
+}
+
+.input::placeholder,
+textarea::placeholder {
+  color: rgba(234, 247, 234, 0.6);
+}
+
+/* ========================= */
+/* 🧮 GRID HELPERS           */
+/* ========================= */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ========================= */
+/* 🖼 IMAGE PREVIEW          */
+/* ========================= */
+.image-preview {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ========================= */
+/* 🚫 REMOVE HARD BACKGROUNDS*/
+/* ========================= */
+/* If any page sets white backgrounds, override them here */
+.page,
+.container,
+.dashboard,
+.weather-page,
+.upload-page {
+  background: transparent !important;
+}
+
+/* ========================= */
+/* 🎯 SMALL UX TOUCHES       */
+/* ========================= */
+h1, h2, h3, h4 {
+  color: #f2fff2;
+  margin: 0 0 8px 0;
+}
+
+p {
+  color: rgba(234, 247, 234, 0.9);
+  margin: 0 0 12px 0;
+}
+/* ========================= */
+/* 🧊 PREMIUM CARD STYLE     */
+/* ========================= */
+.card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: 18px;
+  padding: 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+
+  transition: all 0.3s ease;
+}
+
+/* ✨ Hover Effect */
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(76, 175, 80, 0.4);
+}
+
+/* ========================= */
+/* 🌿 ICON STYLE             */
+/* ========================= */
+.card-icon {
+  font-size: 28px;
+  padding: 12px;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: white;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+}
+
+/* ✨ Icon animation */
+.card:hover .card-icon {
+  transform: rotate(5deg) scale(1.1);
+}
+
+/* ========================= */
+/* 📊 CARD TEXT              */
+/* ========================= */
+.card h3 {
+  margin-top: 10px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.card p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+/* ========================= */
+/* 📈 DASHBOARD STATS CARDS  */
+/* ========================= */
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Number glow */
+.stat-number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
+}
